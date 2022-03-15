@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable-v24/home_back_gr.xml" value="0.144" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/broken_clouds_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/clear_sky.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/clear_sky_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/few_clouds_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/home_back_gr.xml" value="0.144" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/rain_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/scattered_clouds_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/snow_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/thunder_gr.xml" value="0.1575" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/activity_splash.xml" value="0.171875" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/daily_layot.xml" value="0.33" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_favorite.xml" value="0.16" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_hom.xml" value="0.11" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_reminder.xml" value="0.171875" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_settings.xml" value="0.171875" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/hourly_layout.xml" value="0.33" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/menu/menu.xml" value="0.171875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+
+    <color name="clear_sky">#77B52F</color>
+    <color name="clear_sky2">#406F0A</color>
+
+    <color name="few_clouds">#BAC5FF</color>
+    <color name="few_clouds2">#4765FB</color>
+
+    <color name="back1">#484849</color>
+    <color name="back2">#18181A</color>
+
+    <color name="scattered_clouds">#4F69F8</color>
+    <color name="scattered_clouds2">#1C2973</color>
+
+
+    <color name="broken_clouds">#673AB7</color>
+    <color name="broken_clouds2">#2B1257</color>
+
+    <color name="rain">#9C27B0</color>
+    <color name="rain2">#3F0549</color>
+
+    <color name="thunderstorm">#7F7E7F</color>
+    <color name="thunderstorm2">#363636</color>
+
+
+    <color name="snow">#FFFFFF</color>
+    <color name="snow2">#949494</color>
+
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

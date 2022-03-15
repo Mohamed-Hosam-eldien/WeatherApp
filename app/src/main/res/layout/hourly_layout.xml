@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    app:cardCornerRadius="24sp"
+    app:cardUseCompatPadding="true"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:padding="12dp"
+        android:background="@drawable/snow_gr"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4:00"
+            android:fontFamily="@font/sans_font"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+
+        <ImageView
+            android:id="@+id/imgHourly"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txtHourlyUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="o"
+                android:fontFamily="@font/sans_font"
+                android:textColor="@color/black"
+                android:layout_toEndOf="@+id/txtHourlyTemp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtHourlyTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="14"
+                android:fontFamily="@font/sans_font"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
