@@ -1,14 +1,17 @@
 package com.example.weatherapp.data
+import android.app.Application
 import android.content.Context
-import android.util.Log
-import com.example.weatherapp.data.model.WeatherModel
-import com.example.weatherapp.data.network.RepoInterFace
+import androidx.lifecycle.LiveData
+import com.example.weatherapp.data.local.FavDao
+import com.example.weatherapp.data.local.FavDatabase
+import com.example.weatherapp.data.local.FavModel
+import com.example.weatherapp.data.network.NetworkInterFace
 import com.example.weatherapp.data.network.WeatherInterface
 import com.example.weatherapp.data.network.WeatherService
 import kotlinx.coroutines.*
 
 
-class Repository(private val repoInterface : RepoInterFace) {
+class Repository(private val repoInterface : NetworkInterFace, var context:Context) {
 
     fun getAllDataFromApi() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -21,6 +24,39 @@ class Repository(private val repoInterface : RepoInterFace) {
                 }
             }
         }
+    }
+
+    fun getAllDataFromApiByLocation(lat:Double, lng:Double) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val weatherApi = WeatherService.getInstance().create(WeatherInterface::class.java)
+            val response = weatherApi.getWeatherFromLocation(lat, lng)
+
+            if (response.isSuccessful) {
+                if (response.body() != null) {
+                    repoInterface.getAllDataFromResponse(response.body()!!)
+                }
+            }
+        }
+    }
+
+
+    private lateinit var favDao: FavDao
+
+    fun initDB(){
+        val favDatabase = FavDatabase.getInstance(context)
+        favDao = favDatabase.favDao()
+    }
+
+    suspend fun insertFavToDB(favModel : FavModel) {
+        favDao.insertTask(favModel)
+    }
+
+    fun getAllFav(): LiveData<List<FavModel>> {
+        return favDao.getAllFav()
+    }
+
+    suspend fun deleteFromFav(id:Int) {
+        return favDao.deleteFromFav(id)
     }
 
 }

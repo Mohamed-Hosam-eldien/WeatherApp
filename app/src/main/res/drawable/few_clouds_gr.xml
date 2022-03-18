@@ -6,6 +6,6 @@
     <gradient
         android:startColor = "@color/few_clouds"
         android:endColor = "@color/few_clouds2"
-        android:angle = "270"
+        android:angle = "180"
         android:type = "linear" />
 </shape>

@@ -18,8 +18,10 @@
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/snow_gr.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/thunder_gr.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/activity_splash.xml" value="0.171875" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/daily_layot.xml" value="0.33" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fav_layot.xml" value="0.25" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_favorite.xml" value="0.16" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_hom.xml" value="0.11" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/fragment_reminder.xml" value="0.171875" />

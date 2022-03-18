@@ -7,7 +7,7 @@
     <color name="clear_sky2">#406F0A</color>
 
     <color name="few_clouds">#BAC5FF</color>
-    <color name="few_clouds2">#4765FB</color>
+    <color name="few_clouds2">#4060FF</color>
 
     <color name="back1">#484849</color>
     <color name="back2">#18181A</color>
@@ -30,6 +30,7 @@
     <color name="snow2">#949494</color>
 
     <color name="purple_700">#FF3700B3</color>
+    <color name="light_black">#D1000000</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>

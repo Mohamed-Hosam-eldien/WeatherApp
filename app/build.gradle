@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-
+    id 'kotlin-kapt'
 }
 
 android {
@@ -75,5 +75,25 @@ dependencies {
     //floating
     implementation 'com.github.clans:fab:1.6.4'
 
+    // location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    //implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
+    // permission
+    implementation 'com.karumi:dexter:6.2.3'
+
+    // room
+    def roomVersion = "2.4.2"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin Symbolic Processing (KSP)
+//    ksp("androidx.room:room-compiler:$roomVersion")
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
 }

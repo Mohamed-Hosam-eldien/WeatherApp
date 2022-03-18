@@ -2,8 +2,10 @@ package com.example.weatherapp.data.network
 
 import com.example.weatherapp.data.model.WeatherModel
 
-interface RepoInterFace {
+interface NetworkInterFace {
 
     fun getAllDataFromResponse(weatherModel: WeatherModel?)
+
+    fun getAllDataByLocation(lat:Double, lng:Double)
 
 }

@@ -8,13 +8,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.weatherapp.databinding.ActivitySplashBinding
 import com.example.weatherapp.home.viewModel.HomeViewModel
+import com.example.weatherapp.home.viewModel.HomeViewModelFactory
 import com.example.weatherapp.utils.Common
 
 class Splash : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels() {
+        HomeViewModelFactory(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
