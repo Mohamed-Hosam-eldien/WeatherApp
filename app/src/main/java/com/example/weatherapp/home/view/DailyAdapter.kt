@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Daily
+import com.example.weatherapp.utils.Common
+import io.paperdb.Paper
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,9 +38,18 @@ class DailyAdapter(private val dailyList: List<Daily>?): RecyclerView.Adapter<Da
 
         holder.txtDescription.text = dailyDetail?.weather?.get(0)?.description
 
+        var unit = ""
+        when(Paper.book().read<String>(Common.TempUnit)) {
+            "metric" -> unit = "C"
+            "standard" -> unit = "F"
+            "imperial" -> unit = "I"
+        }
+
         holder.txtTemp.text = StringBuilder().append(dailyDetail?.temp?.night?.toInt().toString())
             .append("/")
             .append(dailyDetail?.temp?.morn?.toInt().toString())
+            .append(" ")
+            .append(unit)
 
 
         when(dailyDetail?.weather?.get(0)?.icon) {

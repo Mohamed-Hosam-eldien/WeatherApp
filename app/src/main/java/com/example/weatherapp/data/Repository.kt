@@ -26,10 +26,10 @@ class Repository(private val repoInterface : NetworkInterFace, var context:Conte
         }
     }
 
-    fun getAllDataFromApiByLocation(lat:Double, lng:Double) {
+    fun getAllDataFromApiByLocation(lat:Double, lng:Double, lang:String, unit:String) {
         CoroutineScope(Dispatchers.IO).launch {
             val weatherApi = WeatherService.getInstance().create(WeatherInterface::class.java)
-            val response = weatherApi.getWeatherFromLocation(lat, lng)
+            val response = weatherApi.getWeatherFromLocation(lat, lng, lang, unit)
 
             if (response.isSuccessful) {
                 if (response.body() != null) {

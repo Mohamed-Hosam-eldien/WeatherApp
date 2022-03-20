@@ -15,11 +15,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.FavModel
 import com.example.weatherapp.databinding.ActivityMapsBinding
 import com.example.weatherapp.favorite.viewModel.FavViewModelFactory
 import com.example.weatherapp.favorite.viewModel.FavoriteViewModel
+import com.example.weatherapp.utils.Common
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -36,6 +38,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import io.paperdb.Paper
 import java.io.IOException
 import java.util.*
 
@@ -49,11 +52,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, PermissionListener
     companion object {
         const val REQUEST_CHECK_SETTINGS = 43
     }
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
 
     private lateinit var binding: ActivityMapsBinding
 
     private lateinit var googleMap: GoogleMap
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var location:LatLng
 
 
@@ -62,26 +66,68 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, PermissionListener
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fromSplash = intent.getStringExtra("fromSplash")
+
+        if(fromSplash != null) {
+            binding.btnAdd.text = getString(R.string.add_this_location)
+        } else {
+            binding.btnAdd.text = getString(R.string.add_to_favorite)
+        }
+
         viewModel.initDatabase()
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
         mapFragment.getMapAsync(this)
 
         binding.btnAdd.setOnClickListener {
-            val model = FavModel(
-                0,
-                binding.txtCountry.text.toString(),
-                binding.txtLoyality.text.toString(),
-                location.longitude,
-                location.latitude
-            )
 
-            setToFavorite(model)
+            if(fromSplash == null) {
+                val model = FavModel(
+                    0,
+                    binding.txtCountry.text.toString(),
+                    binding.txtLoyality.text.toString(),
+                    location.longitude,
+                    location.latitude
+                )
+
+                setToFavorite(model)
+                finish()
+
+            } else {
+                Paper.book().write(Common.Lat, location.latitude)
+                Paper.book().write(Common.Lon, location.longitude)
+                Paper.book().write(Common.Country, binding.txtCountry.text.toString())
+                binding.btnAdd.visibility = View.GONE
+                binding.progress.visibility = View.VISIBLE
+                getWeatherData()
+            }
 
         }
 
-        //fusedLocationProviderClient = FusedLocationProviderClient(this)
+    }
+
+
+    private fun getWeatherData() {
+        if(Paper.book().read<String>(Common.Language) == null) {
+            Paper.book().write(Common.Language, "en")
+        }
+        if(Paper.book().read<String>(Common.TempUnit) == null) {
+            Paper.book().write(Common.TempUnit, "metric")
+        }
+
+        viewModel.setLocationToApi(location.latitude,
+            location.longitude,
+            Paper.book().read<String>(Common.Language).toString(),
+            Paper.book().read<String>(Common.TempUnit).toString())
+
+        viewModel.mutableLiveData.observe(this) {
+            Common.weather = it
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     private fun setToFavorite(favModel: FavModel) {
@@ -89,15 +135,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, PermissionListener
         viewModel.insertFav(favModel)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @SuppressLint("MissingPermission")
     override fun onMapReady(map: GoogleMap) {
         googleMap = map

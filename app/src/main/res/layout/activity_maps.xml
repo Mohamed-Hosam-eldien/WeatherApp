@@ -66,6 +66,15 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/sans_font" />
 
+            <ProgressBar
+                android:id="@+id/progress"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"/>
+
+
             <Button
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"

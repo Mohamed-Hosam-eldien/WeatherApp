@@ -6,6 +6,4 @@ interface NetworkInterFace {
 
     fun getAllDataFromResponse(weatherModel: WeatherModel?)
 
-    fun getAllDataByLocation(lat:Double, lng:Double)
-
 }

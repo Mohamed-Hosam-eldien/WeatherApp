@@ -16,13 +16,15 @@ import com.example.weatherapp.data.local.FavModel
 import com.example.weatherapp.databinding.FragmentFavoriteBinding
 import com.example.weatherapp.favorite.viewModel.FavViewModelFactory
 import com.example.weatherapp.favorite.viewModel.FavoriteViewModel
+import com.example.weatherapp.utils.Common
+import io.paperdb.Paper
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding : FragmentFavoriteBinding
-    private lateinit var favAdapter: FavoriteAdapter
-
+    private var countryName: String? = null
 
     private val viewModel: FavoriteViewModel by viewModels {
         FavViewModelFactory(requireContext())
@@ -31,6 +33,7 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        Paper.init(requireContext())
         val view: View = inflater.inflate(R.layout.fragment_favorite, container, false)
         binding = FragmentFavoriteBinding.bind(view)
 
@@ -58,21 +61,25 @@ class FavoriteFragment : Fragment() {
         viewModel.getFav().observe(requireActivity()) {
             val lambdaDelete = { id:Int -> deleteFromFav(id) }
             val lambdaOpenWeatherData = { model:FavModel -> getWeatherData(model) }
-            favAdapter = FavoriteAdapter(lambdaDelete,lambdaOpenWeatherData,it)
+            val favAdapter = FavoriteAdapter(lambdaDelete,lambdaOpenWeatherData,it)
             binding.favRecycler.adapter = favAdapter
         }
     }
 
     private fun getWeatherData(model: FavModel){
-        viewModel.setLocationToApi(model.latitude, model.longitude)
-        viewModel.mutableLiveData.observe(requireActivity()) {
 
-            Log.d("TAG", "getWeatherData BY Location: $it" )
-        }
+        val intent = Intent(requireActivity(),LocationDetails::class.java)
+
+        intent.putExtra("Country",model.countryName)
+        intent.putExtra("Lat",model.latitude)
+        intent.putExtra("Lon",model.longitude)
+
+        startActivity(intent)
+        Log.d("TAG", "getWeatherData BY Before:" )
     }
 
     private fun deleteFromFav(id: Int) {
-        lifecycleScope.launch{
+        lifecycleScope.launch{viewModel
             viewModel.deleteFromFav(id)
         }
     }

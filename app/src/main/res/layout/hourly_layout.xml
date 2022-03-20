@@ -40,14 +40,28 @@
 
 
             <TextView
-                android:id="@+id/txtHourlyUnit"
+                android:id="@+id/g"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="o"
                 android:fontFamily="@font/sans_font"
                 android:textColor="@color/black"
-                android:layout_toEndOf="@+id/txtHourlyTemp"
-                android:textSize="16sp" />
+                android:layout_toRightOf="@+id/txtHourlyTemp"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txtHourlyUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/g"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="12dp"
+                android:layout_toRightOf="@+id/txtHourlyTemp"
+                android:fontFamily="@font/sans_font"
+                android:text="c"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txtHourlyTemp"
@@ -55,10 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:text="14"
                 android:fontFamily="@font/sans_font"
+                android:text="14"
                 android:textColor="@color/black"
-                android:textSize="24sp"/>
+                android:textSize="18sp" />
 
 
         </RelativeLayout>

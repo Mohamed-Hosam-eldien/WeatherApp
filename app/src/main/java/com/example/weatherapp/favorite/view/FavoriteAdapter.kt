@@ -14,8 +14,7 @@ class FavoriteAdapter(
     private val onClick: (Int) -> Unit,
     private val sendLocation: (FavModel) -> Unit,
     private val favModels: List<FavModel>?
-    )
-    : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view : View = LayoutInflater.from(parent.context)

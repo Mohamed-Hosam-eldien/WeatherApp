@@ -18,6 +18,7 @@ class FavoriteViewModel(context: Context) : ViewModel(), NetworkInterFace {
     private val repo = Repository(this, context)
 
     val mutableLiveData : MutableLiveData<WeatherModel> = MutableLiveData<WeatherModel>()
+    val liveData : LiveData<WeatherModel> = mutableLiveData
 
     fun initDatabase() {
         repo.initDB()
@@ -38,16 +39,12 @@ class FavoriteViewModel(context: Context) : ViewModel(), NetworkInterFace {
         return repo.deleteFromFav(id)
     }
 
-    fun setLocationToApi(lat:Double, lng:Double) {
-        repo.getAllDataFromApiByLocation(lat, lng)
+    fun setLocationToApi(lat:Double, lng:Double, lang:String, unit:String) {
+        repo.getAllDataFromApiByLocation(lat, lng, lang, unit)
     }
 
     override fun getAllDataFromResponse(weatherModel: WeatherModel?) {
         mutableLiveData.postValue(weatherModel)
-    }
-
-    override fun getAllDataByLocation(lat: Double, lng: Double) {
-
     }
 
 }

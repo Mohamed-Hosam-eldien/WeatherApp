@@ -16,4 +16,36 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="add_to_favorite">Add to Favorite</string>
     <string name="click_into_map_to_add_location">Click into map to add location!</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="your_location">Your Location</string>
+    <string name="temperature_unit">Temperature Unit</string>
+   <string name="language">Language</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="meter_sec">meter/sec</string>
+    <string name="miles_hour">miles/hour</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="get_current_location">Current Location</string>
+    <string name="location_from_map">Select Location From Map</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="ok">OK</string>
+    <string name="Arabic">Arabic</string>
+    <string name="imperial">imperial</string>
+    <string name="add_this_location">Add this Location</string>
+
 </resources>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentHomBinding
 import com.example.weatherapp.utils.Common
+import io.paperdb.Paper
 
 class HomFragment : Fragment() {
 
@@ -19,6 +20,7 @@ class HomFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Paper.init(requireActivity())
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_hom, container, false)
         binding = FragmentHomBinding.bind(view)
@@ -65,10 +67,16 @@ class HomFragment : Fragment() {
         binding.txtWindSpeed.text = "${weather?.current?.wind_speed.toString()} m/s"
         binding.txtPressure.text = "${weather?.current?.pressure.toString()} hpa"
         binding.txtClouds.text = "${weather?.current?.clouds.toString()} %"
-        Log.d("TAG", "setCurrentData: TIME_ZONE " +weather?.timezone )
 
 
-        Log.d("TAG", "setCurrentData: icon ${weather?.current?.weather?.get(0)?.icon}")
+        binding.txtGovernorate.text = Paper.book().read(Common.Country)
+
+
+        when(Paper.book().read<String>(Common.TempUnit)) {
+            "metric" -> binding.txtTempUnit.text = "C"
+            "standard" -> binding.txtTempUnit.text = "F"
+            "imperial" -> binding.txtTempUnit.text = "I"
+        }
 
         when(weather?.current?.weather?.get(0)?.icon) {
             "01d" -> {

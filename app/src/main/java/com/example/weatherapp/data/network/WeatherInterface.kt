@@ -14,6 +14,7 @@ interface WeatherInterface {
     @GET("onecall?appid=e5a7c0ff66b7ccce6336a786ae939c81")
     suspend fun getWeatherFromLocation(@Query("lat") lat: Double?,
                                        @Query("lon") lon: Double?,
-                                       ): Response<WeatherModel>
+                                       @Query("lang") lang: String?,
+                                       @Query("units") units: String?): Response<WeatherModel>
 
 }

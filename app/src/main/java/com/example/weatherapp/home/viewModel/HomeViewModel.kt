@@ -15,8 +15,8 @@ class HomeViewModel(context : Context) : ViewModel(), NetworkInterFace{
 
     val mutableLiveData : MutableLiveData<WeatherModel> = MutableLiveData<WeatherModel>()
 
-    fun getData() {
-        repo.getAllDataFromApi()
+    fun setLocationToApi(lat:Double, lng:Double, lang:String, unit:String) {
+        repo.getAllDataFromApiByLocation(lat, lng, lang, unit)
     }
 
     override fun getAllDataFromResponse(weatherModel: WeatherModel?) {
@@ -24,8 +24,5 @@ class HomeViewModel(context : Context) : ViewModel(), NetworkInterFace{
         Log.d("TAG", "getAllDataFromResponse: $weatherModel")
     }
 
-    override fun getAllDataByLocation(lat: Double, lng: Double) {
-        TODO("Not yet implemented")
-    }
 
 }
