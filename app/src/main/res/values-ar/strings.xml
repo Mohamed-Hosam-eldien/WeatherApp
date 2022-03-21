@@ -1,35 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Weather</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">الرئيسية</string>
     <string name="favorite">المفضلة</string>
-    <string name="alarm">التنبيه</string>
     <string name="settings">الإعدادات</string>
     <string name="alerts">التنبيهات</string>
-    <string name="API">"e5a7c0ff66b7ccce6336a786ae939c81"</string>
     <string name="humidity">الرطوبة</string>
     <string name="wind_speed">سرعة الرياح</string>
     <string name="pressure">الضغط الجوي</string>
     <string name="clouds">الغيوم</string>
-    <string name="tomorrow">غداً</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="add_to_favorite">إضافة إلى المفضلة</string>
     <string name="click_into_map_to_add_location">أضغط على الخريطة لإضافة موقع</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="your_location">موقعك</string>
     <string name="temperature_unit">وحدة قياس درجة الحرارة</string>
     <string name="language">اللغة</string>
@@ -47,12 +34,10 @@
     <string name="Arabic">العربية</string>
     <string name="imperial">imperial</string>
     <string name="add_this_location">أضف هذا الموقع</string>
-    <string name="sun">الأحد 20/3</string>
 
     <string name="no_favorite_location">ليس لديك اي موقع جغرافي</string>
     <string name="no_alarm">لا يوجد تنبيهات</string>
     <string name="select_date">اختر التاريخ</string>
-    <string name="select_time">اختر الوقت</string>
     <string name="to">إلى</string>
     <string name="set_alarm">أضف تنبيه</string>
     <string name="from">من</string>

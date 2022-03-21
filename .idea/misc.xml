@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable-v24/home_back_gr.xml" value="0.144" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.163" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/broken_clouds_gr.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/clear_sky.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/clear_sky_gr.xml" value="0.1575" />
@@ -15,6 +16,8 @@
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.1845" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.1845" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.163" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/ic_launcher_weather_background.xml" value="0.1" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/rain_gr.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/scattered_clouds_gr.xml" value="0.1575" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/drawable/snow_gr.xml" value="0.1575" />
@@ -39,6 +42,9 @@
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/temprature_layout.xml" value="0.171875" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/layout/wind_speed_layout.xml" value="0.25" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/menu/menu.xml" value="0.171875" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.163" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_weather.xml" value="0.1845" />
+        <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_weather_round.xml" value="0.163" />
         <entry key="..\:/android_studio_projects/WeatherApp/app/src/main/res/xml/root_preferences.xml" value="0.25" />
       </map>
     </option>
