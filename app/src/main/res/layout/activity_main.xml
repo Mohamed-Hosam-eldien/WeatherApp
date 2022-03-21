@@ -13,36 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/scattered_clouds2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imgDrawer"
-                    android:layout_width="60sp"
-                    android:layout_height="28sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:src="@drawable/menu_icon" />
-
-
-
-            </RelativeLayout>
-
-
-        </androidx.cardview.widget.CardView>
 
 
         <fragment

@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfig = AppBarConfiguration(navController.graph, binding.drawerLayout)
 
-        binding.imgDrawer.setOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
+//        binding.imgDrawer.setOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
 
-        //setupActionBarWithNavController(navController, appBarConfig)
+        setupActionBarWithNavController(navController, appBarConfig)
 
 
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

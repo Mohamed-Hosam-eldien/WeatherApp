@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Hourly
+import com.example.weatherapp.utils.Common
+import io.paperdb.Paper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +31,12 @@ class HourlyAdapter(private val hourlyList: List<Hourly>?): RecyclerView.Adapter
         holder.txtHour.text = convertFromUnixToTime(hourDetail?.dt?.toLong())
         holder.txtTemp.text = hourDetail?.temp?.toInt().toString()
 
+
+        when(Paper.book().read<String>(Common.TempUnit)) {
+            "metric" -> holder.txtUnit.text = "C"
+            "standard" -> holder.txtUnit.text = "F"
+            "imperial" -> holder.txtUnit.text = "I"
+        }
 
         when(hourDetail?.weather?.get(0)?.icon) {
             "01d" -> {
@@ -105,7 +113,12 @@ class HourlyAdapter(private val hourlyList: List<Hourly>?): RecyclerView.Adapter
     @SuppressLint("SimpleDateFormat")
     fun convertFromUnixToTime(time: Long?): String {
         if(time != null) {
-            val sdf = SimpleDateFormat("HH:mm")
+
+            val sdf: SimpleDateFormat = if(Paper.book().read<String>(Common.Language).toString() == "en")
+                SimpleDateFormat("HH:mm",Locale.US)
+            else
+                SimpleDateFormat("HH:mm")
+
             val date = Date(time * 1000)
             return sdf.format(date)
         }
