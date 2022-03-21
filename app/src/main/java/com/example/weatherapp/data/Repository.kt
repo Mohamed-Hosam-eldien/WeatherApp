@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import com.example.weatherapp.data.local.FavDao
 import com.example.weatherapp.data.local.FavDatabase
 import com.example.weatherapp.data.local.FavModel
+import com.example.weatherapp.data.local.ReminderDao
+import com.example.weatherapp.data.model.ReminderModel
 import com.example.weatherapp.data.network.NetworkInterFace
 import com.example.weatherapp.data.network.WeatherInterface
 import com.example.weatherapp.data.network.WeatherService
@@ -12,19 +14,6 @@ import kotlinx.coroutines.*
 
 
 class Repository(private val repoInterface : NetworkInterFace, var context:Context) {
-
-    fun getAllDataFromApi() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val weatherApi = WeatherService.getInstance().create(WeatherInterface::class.java)
-            val response = weatherApi.getCurrentWeather()
-
-            if (response.isSuccessful) {
-                if (response.body() != null) {
-                    repoInterface.getAllDataFromResponse(response.body()!!)
-                }
-            }
-        }
-    }
 
     fun getAllDataFromApiByLocation(lat:Double, lng:Double, lang:String, unit:String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -41,10 +30,12 @@ class Repository(private val repoInterface : NetworkInterFace, var context:Conte
 
 
     private lateinit var favDao: FavDao
+    private lateinit var remDao: ReminderDao
 
     fun initDB(){
         val favDatabase = FavDatabase.getInstance(context)
         favDao = favDatabase.favDao()
+        remDao = favDatabase.remDao()
     }
 
     suspend fun insertFavToDB(favModel : FavModel) {
@@ -57,6 +48,19 @@ class Repository(private val repoInterface : NetworkInterFace, var context:Conte
 
     suspend fun deleteFromFav(id:Int) {
         return favDao.deleteFromFav(id)
+    }
+
+
+    suspend fun insertRemToDB(remModel : ReminderModel) {
+        remDao.insertRem(remModel)
+    }
+
+    fun getAllRem(): LiveData<List<ReminderModel>> {
+        return remDao.getAllRem()
+    }
+
+    suspend fun deleteFromRem(id:Int) {
+        return remDao.deleteFromRem(id)
     }
 
 }

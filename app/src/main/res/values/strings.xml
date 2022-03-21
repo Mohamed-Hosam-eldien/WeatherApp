@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">WeatherApp</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Weather</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
@@ -47,5 +47,13 @@
     <string name="Arabic">Arabic</string>
     <string name="imperial">imperial</string>
     <string name="add_this_location">Add this Location</string>
+    <string name="sun">sun 20/3</string>
+    <string name="no_favorite_location">No Favorite Location</string>
+    <string name="no_alarm">No Alarm</string>
+    <string name="select_date">select date</string>
+    <string name="select_time">select time</string>
+    <string name="to">To</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="from">From</string>
 
 </resources>

@@ -4,23 +4,26 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.app.TaskInfo
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -64,30 +67,81 @@ class Splash : AppCompatActivity(), PermissionListener {
         setContentView(binding.root)
         Paper.init(this)
 
-        fusedLocationClient = getFusedLocationProviderClient(this)
+        if (isOnline(this)) {
 
-        Log.d("sTAG", "onCreate: " + Paper.book().read<Double>(Common.Lat)?.toDouble())
-        if(Paper.book().read<Double>(Common.Lat)?.toDouble() == null) {
-            showLocationDialog()
+            fusedLocationClient = getFusedLocationProviderClient(this)
+
+            Log.d("sTAG", "onCreate: " + Paper.book().read<Double>(Common.Lat)?.toDouble())
+            if (Paper.book().read<Double>(Common.Lat)?.toDouble() == null) {
+                showLocationDialog()
+            } else {
+                binding.animationView.setAnimation(R.raw.lotti_weather)
+                getWeatherData(
+                    Paper.book().read<Double>(Common.Lat)!!,
+                    Paper.book().read<Double>(Common.Lon)!!
+                )
+            }
         } else {
-            binding.animationView.setAnimation(R.raw.lotti_weather)
-            getWeatherData(
-                Paper.book().read<Double>(Common.Lat)!!,
-                Paper.book().read<Double>(Common.Lon)!!
-            )
+            showConnectionDialog()
         }
 
     }
 
+    private fun showConnectionDialog() {
+
+        val view = LayoutInflater.from(this).inflate(R.layout.internet_layout, null)
+        val btn: Button = view.findViewById(R.id.btnTryAgain)
+
+        val dialog = Dialog(this, R.style.Theme_Dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        btn.setOnClickListener {
+            recreate()
+        }
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+                } else {
+                    TODO("VERSION.SDK_INT < M")
+                }
+
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     private fun showLocationDialog() {
 
-        val view = LayoutInflater.from(this).inflate(R.layout.location_layout,null)
+        val view = LayoutInflater.from(this).inflate(R.layout.location_layout, null)
         val radioG: RadioGroup = view.findViewById(R.id.locationRadioGroup)
         val btnOk: Button = view.findViewById(R.id.btnOk)
+        val txt: TextView = view.findViewById(R.id.txtLabel)
         val prog: ProgressBar = view.findViewById(R.id.progress)
 
-        btnOk.setOnClickListener{
-            when(radioG.checkedRadioButtonId) {
+        txt.setTextColor(Color.WHITE)
+
+        btnOk.setOnClickListener {
+            when (radioG.checkedRadioButtonId) {
                 R.id.rbCurrentLocation -> {
                     btnOk.visibility = View.GONE
                     prog.visibility = View.VISIBLE
@@ -114,7 +168,7 @@ class Splash : AppCompatActivity(), PermissionListener {
     }
 
     private fun getLocation() {
-        if (isPermissionGiven()){
+        if (isPermissionGiven()) {
             getCurrentLocation()
         } else {
             givePermission()
@@ -122,8 +176,11 @@ class Splash : AppCompatActivity(), PermissionListener {
     }
 
 
-    private fun isPermissionGiven(): Boolean{
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    private fun isPermissionGiven(): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun givePermission() {
@@ -162,11 +219,12 @@ class Splash : AppCompatActivity(), PermissionListener {
         builder.addLocationRequest(locationRequest)
         val locationSettingsRequest = builder.build()
 
-        val result = LocationServices.getSettingsClient(this).checkLocationSettings(locationSettingsRequest)
+        val result =
+            LocationServices.getSettingsClient(this).checkLocationSettings(locationSettingsRequest)
         result.addOnCompleteListener { task ->
             try {
                 val response = task.getResult(ApiException::class.java)
-                if (response!!.locationSettingsStates?.isLocationPresent == true){
+                if (response!!.locationSettingsStates?.isLocationPresent == true) {
 
                     getFusedLocationProviderClient(this).requestLocationUpdates(
                         locationRequest, @SuppressLint("MissingPermission")
@@ -183,13 +241,14 @@ class Splash : AppCompatActivity(), PermissionListener {
                 when (exception.statusCode) {
                     LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
                         val resolvable = exception as ResolvableApiException
-                        resolvable.startResolutionForResult(this,
+                        resolvable.startResolutionForResult(
+                            this,
                             MapsActivity.REQUEST_CHECK_SETTINGS
                         )
                     } catch (e: IntentSender.SendIntentException) {
                     } catch (e: ClassCastException) {
                     }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> { }
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {}
                 }
             }
         }
@@ -207,10 +266,16 @@ class Splash : AppCompatActivity(), PermissionListener {
             addresses = gcd.getFromLocation(location.latitude, location.longitude, 1)
             if (addresses.isNotEmpty()) {
 
-                if(!addresses[0].adminArea.isNullOrEmpty() && !addresses[0].countryName.isNullOrEmpty()) {
+                if (!addresses[0].adminArea.isNullOrEmpty() && !addresses[0].countryName.isNullOrEmpty()) {
                     val country = addresses[0].adminArea + " - " + addresses[0].countryName
                     Paper.book().write(Common.Country, country)
-                    getWeatherData(location.latitude, location.longitude)
+
+                    Timer().schedule(object : TimerTask() {
+                        override fun run() {
+                            getWeatherData(location.latitude, location.longitude)
+                        }
+                    }, 2000)
+
                 }
 
             }
@@ -232,18 +297,21 @@ class Splash : AppCompatActivity(), PermissionListener {
     }
 
     private fun getWeatherData(latitude: Double, longitude: Double) {
-        if(Paper.book().read<String>(Common.Language) == null) {
+        if (Paper.book().read<String>(Common.Language) == null) {
             Paper.book().write(Common.Language, "en")
         }
-        if(Paper.book().read<String>(Common.TempUnit) == null) {
+        if (Paper.book().read<String>(Common.TempUnit) == null) {
             Paper.book().write(Common.TempUnit, "metric")
         }
 
+        updateViews(Paper.book().read<String>(Common.Language).toString())
 
-        viewModel.setLocationToApi(latitude,
+        viewModel.setLocationToApi(
+            latitude,
             longitude,
             Paper.book().read<String>(Common.Language).toString(),
-            Paper.book().read<String>(Common.TempUnit).toString())
+            Paper.book().read<String>(Common.TempUnit).toString()
+        )
 
         viewModel.mutableLiveData.observe(this) {
             Common.weather = it
@@ -252,5 +320,15 @@ class Splash : AppCompatActivity(), PermissionListener {
             finish()
         }
 
+    }
+
+    private fun updateViews(lang: String) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val configuration = Configuration()
+        configuration.locale = locale
+        baseContext
+            .resources
+            .updateConfiguration(configuration, baseContext.resources.displayMetrics)
     }
 }

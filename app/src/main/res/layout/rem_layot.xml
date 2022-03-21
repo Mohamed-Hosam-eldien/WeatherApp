@@ -20,34 +20,33 @@
             android:id="@+id/imgDelete"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:padding="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="8dp"
             android:src="@drawable/ic_baseline_delete_forever_24" />
 
         <TextView
-            android:id="@+id/txtFavCountry"
+            android:id="@+id/txtFromDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:fontFamily="@font/sans_font"
             android:padding="4dp"
-            android:text="Alexandria - Egypt"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
 
         <TextView
-            android:id="@+id/txtFavLoyality"
+            android:id="@+id/txtToDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtFavCountry"
+            android:layout_below="@id/txtFromDate"
             android:fontFamily="@font/sans_font"
-            android:text="elmanshia"
             android:padding="4dp"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

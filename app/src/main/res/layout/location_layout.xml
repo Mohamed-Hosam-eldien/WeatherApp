@@ -10,11 +10,13 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/txtLabel"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/few_clouds2"

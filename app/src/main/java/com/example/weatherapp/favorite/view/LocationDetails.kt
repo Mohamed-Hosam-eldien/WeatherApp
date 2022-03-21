@@ -3,7 +3,9 @@ package com.example.weatherapp.favorite.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -15,6 +17,8 @@ import com.example.weatherapp.home.view.DailyAdapter
 import com.example.weatherapp.home.view.HourlyAdapter
 import com.example.weatherapp.utils.Common
 import io.paperdb.Paper
+import java.text.SimpleDateFormat
+import java.util.*
 
 class LocationDetails : AppCompatActivity() {
 
@@ -33,20 +37,32 @@ class LocationDetails : AppCompatActivity() {
 
         binding.txtGovernorate.text = intent.getStringExtra("Country")
 
-
         viewModel.setLocationToApi(intent.getDoubleExtra("Lat",0.0),
             intent.getDoubleExtra("Lon",0.0),
             Paper.book().read<String>(Common.Language).toString(),
             Paper.book().read<String>(Common.TempUnit).toString())
 
+
         viewModel.liveData.observe(this) {
             weather = it
 
-            setCurrentData()
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
 
-            setHourlyData()
+                    runOnUiThread {
 
-            setDailyData()
+                        setCurrentData()
+
+                        setHourlyData()
+
+                        setDailyData()
+
+                        binding.cardDetails.visibility = View.VISIBLE
+                        binding.progress.visibility = View.GONE
+                        binding.cardBackground.visibility = View.VISIBLE
+                    }
+                }
+            }, 1500)
 
         }
 
@@ -80,9 +96,14 @@ class LocationDetails : AppCompatActivity() {
         binding.txtWindSpeed.text = "${weather.current.wind_speed} m/s"
         binding.txtPressure.text = "${weather.current.pressure} hpa"
         binding.txtClouds.text = "${weather.current.clouds} %"
-        Log.d("TAG", "setCurrentData: TIME_ZONE " +weather.timezone )
 
-        Log.d("TAG", "setCurrentData: icon ${weather.current.weather[0].icon}")
+        setCurrentDate()
+
+        when(Paper.book().read<String>(Common.TempUnit)) {
+            "metric" -> binding.txtTempUnit.text = "C"
+            "standard" -> binding.txtTempUnit.text = "F"
+            "imperial" -> binding.txtTempUnit.text = "I"
+        }
 
         when(weather.current.weather[0].icon) {
             "01d" -> {
@@ -153,5 +174,15 @@ class LocationDetails : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
+    private fun setCurrentDate() {
+        val sdf: SimpleDateFormat = if(Paper.book().read<String>(Common.Language).toString() == "en")
+            SimpleDateFormat("EEEE dd/M", Locale.US)
+        else
+            SimpleDateFormat("EEEE dd/M")
+
+        val currentDate = sdf.format(Date())
+        binding.txtCurrentDate.text = currentDate
+    }
 
 }

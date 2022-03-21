@@ -113,7 +113,12 @@ class HourlyAdapter(private val hourlyList: List<Hourly>?): RecyclerView.Adapter
     @SuppressLint("SimpleDateFormat")
     fun convertFromUnixToTime(time: Long?): String {
         if(time != null) {
-            val sdf = SimpleDateFormat("HH:mm")
+
+            val sdf: SimpleDateFormat = if(Paper.book().read<String>(Common.Language).toString() == "en")
+                SimpleDateFormat("HH:mm",Locale.US)
+            else
+                SimpleDateFormat("HH:mm")
+
             val date = Date(time * 1000)
             return sdf.format(date)
         }

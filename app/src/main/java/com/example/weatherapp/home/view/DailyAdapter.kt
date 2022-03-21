@@ -30,10 +30,14 @@ class DailyAdapter(private val dailyList: List<Daily>?): RecyclerView.Adapter<Da
         val dailyDetail = dailyList?.get(position+1)
 
         if(position == 0) {
-            holder.txtDay.text = holder.imgDaily.context.getString(R.string.tomorrow)
+
+            if(Paper.book().read<String>(Common.Language).toString() == "en")
+                holder.txtDay.text = "Tomorrow"
+            else
+                holder.txtDay.text = "غداً"
+
         } else {
             holder.txtDay.text = convertFromUnixToTime(dailyDetail?.dt?.toLong())
-
         }
 
         holder.txtDescription.text = dailyDetail?.weather?.get(0)?.description
@@ -127,7 +131,12 @@ class DailyAdapter(private val dailyList: List<Daily>?): RecyclerView.Adapter<Da
     @SuppressLint("SimpleDateFormat")
     fun convertFromUnixToTime(time: Long?): String {
         if(time != null) {
-            val sdf = SimpleDateFormat("EEEE")
+
+            val sdf: SimpleDateFormat = if(Paper.book().read<String>(Common.Language).toString() == "en")
+                SimpleDateFormat("EEEE", Locale.US)
+            else
+                SimpleDateFormat("EEEE")
+
             val date = Date(time * 1000)
             return sdf.format(date)
         }

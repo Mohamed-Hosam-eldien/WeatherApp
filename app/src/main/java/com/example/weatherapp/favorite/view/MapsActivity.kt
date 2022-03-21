@@ -66,6 +66,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, PermissionListener
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = getString(R.string.choose_location)
+
         val fromSplash = intent.getStringExtra("fromSplash")
 
         if(fromSplash != null) {
@@ -121,7 +123,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, PermissionListener
             Paper.book().read<String>(Common.Language).toString(),
             Paper.book().read<String>(Common.TempUnit).toString())
 
-        viewModel.mutableLiveData.observe(this) {
+        viewModel.liveData.observe(this) {
             Common.weather = it
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

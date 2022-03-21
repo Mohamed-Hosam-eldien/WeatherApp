@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding : FragmentFavoriteBinding
-    private var countryName: String? = null
 
     private val viewModel: FavoriteViewModel by viewModels {
         FavViewModelFactory(requireContext())
@@ -59,15 +58,21 @@ class FavoriteFragment : Fragment() {
 
     private fun getAllFavData() {
         viewModel.getFav().observe(requireActivity()) {
-            val lambdaDelete = { id:Int -> deleteFromFav(id) }
-            val lambdaOpenWeatherData = { model:FavModel -> getWeatherData(model) }
-            val favAdapter = FavoriteAdapter(lambdaDelete,lambdaOpenWeatherData,it)
-            binding.favRecycler.adapter = favAdapter
+            if(it.isNotEmpty()) {
+                val lambdaDelete = { id:Int -> deleteFromFav(id) }
+                val lambdaOpenWeatherData = { model:FavModel -> getWeatherData(model) }
+                val favAdapter = FavoriteAdapter(lambdaDelete,lambdaOpenWeatherData,it)
+                binding.favRecycler.adapter = favAdapter
+                binding.noLayout.visibility = View.GONE
+                binding.favRecycler.visibility = View.VISIBLE
+            } else {
+                binding.noLayout.visibility = View.VISIBLE
+                binding.favRecycler.visibility = View.GONE
+            }
         }
     }
 
     private fun getWeatherData(model: FavModel){
-
         val intent = Intent(requireActivity(),LocationDetails::class.java)
 
         intent.putExtra("Country",model.countryName)

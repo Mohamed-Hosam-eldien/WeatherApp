@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/sans_font"
-            android:text="sat 20/3"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -59,7 +58,7 @@
                         android:id="@+id/cardBackground"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/clear_sky_gr"
+                        android:background="@color/few_clouds2"
                         android:gravity="end"
                         android:orientation="horizontal"
                         android:weightSum="2">
@@ -123,10 +122,10 @@
                                     android:layout_centerHorizontal="true"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="24dp"
-                                    android:text="34"
                                     android:fontFamily="@font/sans_font"
+                                    android:text="34"
                                     android:textColor="@color/white"
-                                    android:textSize="70sp" />
+                                    android:textSize="60sp" />
 
                             </RelativeLayout>
 

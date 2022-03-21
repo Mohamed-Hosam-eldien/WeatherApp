@@ -1,4 +1,4 @@
-package com.example.weatherapp.favorite.viewModel
+package com.example.weatherapp.reminder.viewModel
 
 import android.content.Context
 import android.util.Log
@@ -8,43 +8,38 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.Repository
 import com.example.weatherapp.data.local.FavModel
+import com.example.weatherapp.data.model.ReminderModel
 import com.example.weatherapp.data.model.WeatherModel
 import com.example.weatherapp.data.network.NetworkInterFace
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(context: Context) : ViewModel(), NetworkInterFace {
+class ReminderViewModel(context:Context) : ViewModel(),NetworkInterFace {
 
     private val repo = Repository(this, context)
 
-    private val mutableLiveData : MutableLiveData<WeatherModel> = MutableLiveData<WeatherModel>()
+    val mutableLiveData : MutableLiveData<WeatherModel> = MutableLiveData<WeatherModel>()
     val liveData : LiveData<WeatherModel> = mutableLiveData
 
     fun initDatabase() {
         repo.initDB()
     }
 
-    fun insertFav(favLocation: FavModel) {
+    fun insertRem(rem: ReminderModel) {
         viewModelScope.launch {
-            repo.insertFavToDB(favLocation)
+            repo.insertRemToDB(rem)
             Log.d("TAG", "insertFav: done")
         }
     }
 
-    fun getFav(): LiveData<List<FavModel>> {
-        return repo.getAllFav()
+    fun getRem(): LiveData<List<ReminderModel>> {
+        return repo.getAllRem()
     }
 
-    suspend fun deleteFromFav(id:Int) {
-        return repo.deleteFromFav(id)
-    }
-
-    fun setLocationToApi(lat:Double, lng:Double, lang:String, unit:String) {
-        repo.getAllDataFromApiByLocation(lat, lng, lang, unit)
+    suspend fun deleteFromRem(id:Int) {
+        return repo.deleteFromRem(id)
     }
 
     override fun getAllDataFromResponse(weatherModel: WeatherModel?) {
-        mutableLiveData.postValue(weatherModel!!)
+        mutableLiveData.postValue(weatherModel)
     }
-
 }
