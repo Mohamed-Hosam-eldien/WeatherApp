@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.weatherapp.home.view.HomFragment"
+        android:name="com.example.weatherapp.ui.home.view.HomFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_hom">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/favorite"
-        android:name="com.example.weatherapp.favorite.view.FavoriteFragment"
+        android:name="com.example.weatherapp.ui.favorite.view.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/alert"
-        android:name="com.example.weatherapp.reminder.view.ReminderFragment"
+        android:name="com.example.weatherapp.ui.reminder.view.ReminderFragment"
         android:label="@string/alerts"
         tools:layout="@layout/fragment_reminder">
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.example.weatherapp.settings.view.SettingsFragment"
+        android:name="com.example.weatherapp.ui.settings.view.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings">
         <action

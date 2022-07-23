@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp">
         <activity
-            android:name=".favorite.view.LocationDetails"
+            android:name="com.example.weatherapp.ui.favorite.view.LocationDetails"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -36,11 +36,11 @@
             android:value="AIzaSyBLTt0fRaVH0lLfzLIwn6dr2jwz76qSiro" />
 
         <activity
-            android:name=".favorite.view.MapsActivity"
+            android:name="com.example.weatherapp.ui.favorite.view.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Splash"
+            android:name=".ui.Splash"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true" />
 
     </application>

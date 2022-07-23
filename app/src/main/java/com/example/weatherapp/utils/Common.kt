@@ -1,6 +1,6 @@
 package com.example.weatherapp.utils
 
-import com.example.weatherapp.data.model.WeatherModel
+import com.example.weatherapp.models.WeatherModel
 
 class Common {
 

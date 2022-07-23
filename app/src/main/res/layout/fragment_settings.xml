@@ -7,7 +7,7 @@
     android:layout_marginTop="16dp"
     android:orientation="vertical"
     android:layout_gravity="start"
-    tools:context=".settings.view.SettingsFragment"
+    tools:context=".ui.settings.view.SettingsFragment"
     android:gravity="start">
 
     <LinearLayout
